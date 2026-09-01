@@ -8,6 +8,9 @@ export interface AgentStep {
 
 export interface AgentState {
   task: string;
+  testPath?: string;
+  testPassed: boolean;
+  lastTestOutput?: string;
   steps: AgentStep[];
   status: "running" | "success" | "failed";
 }
