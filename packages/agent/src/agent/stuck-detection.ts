@@ -1,7 +1,31 @@
 import type { AgentAction } from "./action.js";
 
-export function actionKey(action: AgentAction): string {
+export function actionKey(
+  action: AgentAction,
+): string {
   return JSON.stringify(action);
+}
+
+export function countConsecutiveActions(
+  history: AgentAction[],
+  action: AgentAction,
+): number {
+  const key = actionKey(action);
+  let count = 0;
+
+  for (
+    let index = history.length - 1;
+    index >= 0;
+    index -= 1
+  ) {
+    if (actionKey(history[index]) !== key) {
+      break;
+    }
+
+    count += 1;
+  }
+
+  return count;
 }
 
 export function isRepeatedAction(
@@ -9,19 +33,18 @@ export function isRepeatedAction(
   action: AgentAction,
   threshold: number,
 ): boolean {
-  if (threshold <= 0) {
-    return false;
+  if (threshold <= 1) {
+    return true;
   }
 
-  const key = actionKey(action);
+  const previousConsecutive =
+    countConsecutiveActions(
+      history,
+      action,
+    );
 
-  let count = 0;
-
-  for (const previous of history) {
-    if (actionKey(previous) === key) {
-      count += 1;
-    }
-  }
-
-  return count >= threshold;
+  // Include the current action in the count.
+  return (
+    previousConsecutive + 1 >= threshold
+  );
 }

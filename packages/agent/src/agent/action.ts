@@ -1,16 +1,22 @@
 import { z } from "zod";
 
-export const AgentActionSchema = z.discriminatedUnion("type", [
-  z.object({
-    type: z.literal("tool"),
-    tool: z.string().min(1),
-    arguments: z.record(z.string(), z.unknown()),
-  }),
-  z.object({
-    type: z.literal("finish"),
-    answer: z.string(),
-  }),
-]);
+export const AgentActionSchema =
+  z.discriminatedUnion("type", [
+    z.object({
+      type: z.literal("tool"),
+      tool: z.string().min(1),
+      arguments: z.record(
+        z.string(),
+        z.unknown(),
+      ),
+      rationale: z.string().optional(),
+    }),
+
+    z.object({
+      type: z.literal("finish"),
+      answer: z.string(),
+    }),
+  ]);
 
 export type AgentAction = z.infer<
   typeof AgentActionSchema
@@ -29,5 +35,7 @@ export function parseAgentAction(
     );
   }
 
-  return AgentActionSchema.parse(parsed);
+  return AgentActionSchema.parse(
+    parsed,
+  );
 }

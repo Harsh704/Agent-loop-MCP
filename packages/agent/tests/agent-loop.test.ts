@@ -90,7 +90,7 @@ describe("AgentLoop", () => {
       mcp: mcp as never,
       repositoryRoot,
       maxSteps: 5,
-      maxRepeatedActions: 2,
+      maxRepeatedActions: 3,
     });
 
     const result = await loop.run(
@@ -219,7 +219,7 @@ describe("AgentLoop", () => {
       mcp: mcp as never,
       repositoryRoot,
       maxSteps: 3,
-      maxRepeatedActions: 2,
+      maxRepeatedActions: 3,
     });
 
     const result = await loop.run(
@@ -231,7 +231,7 @@ describe("AgentLoop", () => {
     );
 
     expect(result.state.status).toBe(
-      "failed",
+      "budget_exceeded",
     );
 
     expect(result.state.steps).toHaveLength(
@@ -291,7 +291,7 @@ describe("AgentLoop", () => {
       mcp: mcp as never,
       repositoryRoot,
       maxSteps: 10,
-      maxRepeatedActions: 2,
+      maxRepeatedActions: 3,
     });
 
     const result = await loop.run(
@@ -307,7 +307,7 @@ describe("AgentLoop", () => {
     );
 
     expect(result.state.status).toBe(
-      "failed",
+      "stuck",
     );
 
     expect(result.state.steps).toHaveLength(
@@ -445,7 +445,7 @@ describe("AgentLoop", () => {
         mcp: mcp as never,
         repositoryRoot,
         maxSteps: 5,
-        maxRepeatedActions: 2,
+        maxRepeatedActions: 3,
       });
 
       const result = await loop.run(
@@ -553,7 +553,7 @@ describe("AgentLoop", () => {
       mcp: mcp as never,
       repositoryRoot,
       maxSteps: 5,
-      maxRepeatedActions: 2,
+      maxRepeatedActions: 3,
     });
 
     const result = await loop.run(
