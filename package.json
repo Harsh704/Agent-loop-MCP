@@ -1,0 +1,12 @@
+{
+  "name": "agent-loop-mcp",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "pnpm --filter @agent-loop/agent build",
+    "test": "pnpm --filter @agent-loop/agent test",
+    "agent": "pnpm --filter @agent-loop/agent agent",
+    "eval": "pnpm --filter @agent-loop/agent eval"
+  }
+}
