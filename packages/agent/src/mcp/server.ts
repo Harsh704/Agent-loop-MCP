@@ -10,7 +10,8 @@ import { proposeEditTool } from "../tools/propose-edit.js";
 import { runTestTool } from "../tools/run-test.js";
 
 const repositoryRoot = path.resolve(
-  process.env.REPOSITORY_ROOT ?? process.cwd(),
+  process.env.REPOSITORY_ROOT ??
+    path.resolve(process.cwd(), "../.."),
 );
 
 const context = {
