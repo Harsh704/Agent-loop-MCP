@@ -5,11 +5,13 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
+    "typecheck": "tsc --noEmit",
     "dev": "tsx src/cli.ts",
     "test": "vitest run",
     "test:watch": "vitest",
     "agent": "tsx src/cli.ts",
-    "eval": "tsx src/evaluation/runner.ts"
+    "eval": "tsx src/evaluation/runner.ts",
+    "mcp": "tsx src/mcp/server.ts"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.30.0",
